@@ -45,4 +45,33 @@ public class CalculationTest {
         // Then
         assertThat(sum).isEqualTo(54);
     }
+
+    @Test
+    public void should_add_next_two_shot_scores_to_a_strike_not_at_the_end() {
+
+        // Given
+        int[] scores = {10, 5,3, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0};
+        BowlingGame bowlingGame = new BowlingGame();
+
+        // When
+        int sum = bowlingGame.calculateSum(scores);
+
+        // Then
+        assertThat(sum).isEqualTo(26);
+    }
+
+    @Test
+    public void should_add_next_two_shot_scores_to_a_strike_at_the_end() {
+
+        // Given
+        int[] scores = {9,1, 5,5, 7,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 10, 1,2};
+        BowlingGame bowlingGame = new BowlingGame();
+
+        // When
+        int sum = bowlingGame.calculateSum(scores);
+
+        // Then
+        assertThat(sum).isEqualTo(52);
+    }
+
 }
