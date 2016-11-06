@@ -1,3 +1,8 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class BowlingGame {
 
     private static final int TOTAL_FRAME = 10;
@@ -26,5 +31,31 @@ public class BowlingGame {
 
     private boolean isStrike(int score) {
         return score == MAX_FRAME_SCORE;
+    }
+
+    public List<Integer> convertRawScoreToList(String rawScores) {
+        List<String> splittedScores = Arrays.stream(rawScores.split("")).collect(Collectors.toList());
+        List<Integer> scores = new ArrayList<>();
+        int shot = 0;
+        while (shot < splittedScores.size()) {
+            String currentShot = splittedScores.get(shot);
+            switch (currentShot) {
+                case "X":
+                    scores.add(10);
+                    break;
+                case "-":
+                    scores.add(0);
+                    break;
+                case "/":
+                    scores.add(MAX_FRAME_SCORE - Integer.parseInt(splittedScores.get(shot - 1)));
+                    break;
+                default:
+                    scores.add(Integer.parseInt(currentShot));
+                    break;
+            }
+
+            shot++;
+        }
+        return scores;
     }
 }
